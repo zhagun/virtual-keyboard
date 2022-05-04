@@ -215,11 +215,6 @@ export default [
     keyCode: 'ShiftLeft',
   },
   {
-    keyChar: '<',
-    keySpecial: '>',
-    keyCode: 'IntlBackslash',
-  },
-  {
     keyChar: 'z',
     keySpecial: 'Z',
     keyCode: 'KeyZ',

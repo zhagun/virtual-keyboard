@@ -1,4 +1,6 @@
 import createElement from './createKeyborad.js';
+import keysLang from './keysLang/general.js';
+import Key from './keys.js';
 
 const mainBlock = document.createElement('main');
 const container = document.createElement('div');
@@ -13,7 +15,8 @@ export default class Keyboard {
     this.isCaps = false;
   }
 
-  createTextBlock() {
+  createTextBlock(lngCode) {
+    this.startLang = keysLang[lngCode];
     this.view = createElement(
       'textarea',
       'viewBlock',
@@ -35,6 +38,14 @@ export default class Keyboard {
     this.btnsSort.forEach((lineKeys, index) => {
       const lineElem = createElement('div', 'keyboard__line', ['line', index + 1]);
       this.keyboardContainer.appendChild(lineElem);
+      lineKeys.forEach((code) => {
+        const keyObj = this.startLang.find((key) => key.keyCode === code);
+        if (keyObj) {
+          const keyButton = new Key(keyObj);
+          this.btnsKey.push(keyButton);
+          lineElem.appendChild(keyButton.keyConainer);
+        }
+      });
     });
   }
 }
