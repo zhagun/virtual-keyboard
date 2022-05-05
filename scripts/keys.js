@@ -5,7 +5,6 @@ export default class Key {
     this.keyCode = keyCode;
     this.keyChar = keyChar;
     this.keySpecial = keySpecial;
-
     this.keyConainer = createElement(
       'div',
       'keys',

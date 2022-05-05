@@ -3,7 +3,12 @@
   box-sizing: border-box;
 }
 body {
+ font-family: Inter;
  transition: 0.2s;
+}
+main {
+  height: 100vh;
+  background-color: #f7f7f7;
 }
 .main__container {
   display: flex;
@@ -11,6 +16,9 @@ body {
   align-items: center;
   flex-direction: column;
   margin: 0 10px;
+}
+.main__title {
+  padding-top: 30px;
 }
 .viewBlock {
   display: block;
@@ -29,6 +37,7 @@ body {
   width: 100%;
   background-color: #4f5da1;
   /* background-color: #8a387b; */
+  border-radius: 3px;
 }
 .keyboard__line {
   display: flex;
@@ -43,16 +52,17 @@ body {
   align-items: center;
   flex-direction: column;
   margin: 4px;
+  border-radius: 3px;
   transition: .2s;
-  z-index: 5;
   user-select: none;
+  box-shadow: 0 6px 4px -4px rgb(28 28 150);
 }
 .supText {
   position: absolute;
   width: 100%;
   font-size: 9pt;
   top: 3px;
-  left: 3px;
+  left: 8px;
   font-weight: bold;
 }
 .mainText {

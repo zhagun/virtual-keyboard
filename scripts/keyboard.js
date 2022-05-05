@@ -17,7 +17,7 @@ export default class Keyboard {
 
   createTextBlock(lngCode) {
     this.startLang = keysLang[lngCode];
-    this.view = createElement(
+    this.viewTxt = createElement(
       'textarea',
       'viewBlock',
       ['rows', 5],
@@ -26,8 +26,8 @@ export default class Keyboard {
       ['spellcheck', false],
       ['autocorrect', 'off'],
     );
-    this.keyboardContainer = createElement('div', 'container__keyboard');
-    container.appendChild(this.view);
+    this.keyboardContainer = createElement('div', 'container__keyboard', ['lang', lngCode]);
+    container.appendChild(this.viewTxt);
     container.appendChild(this.keyboardContainer);
     document.body.prepend(mainBlock);
     return this;
@@ -39,13 +39,26 @@ export default class Keyboard {
       const lineElem = createElement('div', 'keyboard__line', ['line', index + 1]);
       this.keyboardContainer.appendChild(lineElem);
       lineKeys.forEach((code) => {
-        const keyObj = this.startLang.find((key) => key.keyCode === code);
-        if (keyObj) {
-          const keyButton = new Key(keyObj);
+        const keyItem = this.startLang.find((key) => key.keyCode === code);
+        if (keyItem) {
+          const keyButton = new Key(keyItem);
           this.btnsKey.push(keyButton);
           lineElem.appendChild(keyButton.keyConainer);
         }
       });
     });
+    this.keyboardContainer.onmousedown = this.getPressedBtn;
+  }
+
+  getPressedBtn = (e) => {
+    const keyPressed = e.target.closest('.keys');
+    if (!keyPressed) return;
+    const { dataset: { code } } = keyPressed;
+    this.showTextOnTextaria(code);
+  };
+
+  showTextOnTextaria(code) {
+    const keyItem = this.btnsKey.find((key) => key.keyCode === code);
+    this.viewTxt.value += keyItem.keyChar;
   }
 }
