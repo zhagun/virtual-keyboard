@@ -5,7 +5,8 @@ export default class Key {
     this.keyCode = keyCode;
     this.keyChar = keyChar;
     this.keySpecial = keySpecial;
-    this.keyConainer = createElement(
+    this.specialKeyStatus = Boolean(keyChar.match(/Ctrl|arr|Alt|Shift|Tab|Back|Del|Enter|Caps|Win/));
+    this.keyContainer = createElement(
       'div',
       'keys',
       ['code', this.keyCode],
@@ -15,12 +16,12 @@ export default class Key {
       this.mainKeyText = createElement('div', 'mainText');
       this.supText.innerHTML = keySpecial;
       this.mainKeyText.innerHTML = keyChar;
-      this.keyConainer.appendChild(this.supText);
-      this.keyConainer.appendChild(this.mainKeyText);
+      this.keyContainer.appendChild(this.supText);
+      this.keyContainer.appendChild(this.mainKeyText);
     } else {
       this.mainKeyText = createElement('div', 'mainText');
       this.mainKeyText.innerHTML = keyChar;
-      this.keyConainer.appendChild(this.mainKeyText);
+      this.keyContainer.appendChild(this.mainKeyText);
     }
   }
 }
