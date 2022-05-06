@@ -19,8 +19,11 @@ export default class Key {
       this.keyContainer.appendChild(this.supText);
       this.keyContainer.appendChild(this.mainKeyText);
     } else {
+      this.supText = createElement('div', 'supText');
+      this.supText.innerHTML = '';
       this.mainKeyText = createElement('div', 'mainText');
       this.mainKeyText.innerHTML = keyChar;
+      this.keyContainer.appendChild(this.supText);
       this.keyContainer.appendChild(this.mainKeyText);
     }
   }

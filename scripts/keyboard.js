@@ -89,6 +89,8 @@ export default class Keyboard {
       if (code.match(/Control|Alt|Caps/) && e.repeat) return;
       if (code.match(/Control/)) this.ctrKey = true;
       if (code.match(/Alt/)) this.altKey = true;
+      if (code.match(/Control/) && this.altKey) this.setLang();
+      if (code.match(/Alt/) && this.ctrKey) this.setLang();
       if (code.match(/Caps/) && !this.isCaps) {
         this.isCaps = true;
         this.changeCaseToUpper(true);
@@ -106,12 +108,12 @@ export default class Keyboard {
         if (this.shiftKey) {
           this.showTextOnTextaria(
             keyItem,
-            keyItem.supText ? keyItem.keySpecial : keyItem.keyChar,
+            keyItem.supText.innerHTML ? keyItem.keySpecial : keyItem.keyChar,
           );
         } else {
           this.showTextOnTextaria(
             keyItem,
-            !keyItem.supText ? keyItem.keySpecial : keyItem.keyChar,
+            !keyItem.supText.innerHTML ? keyItem.keySpecial : keyItem.keyChar,
           );
         }
       }
@@ -134,18 +136,18 @@ export default class Keyboard {
     if (statusCaseUper) {
       this.btnsKey.forEach((keyBtn, i) => {
         if (
-          !keyBtn.specialKeyStatus && this.isCaps && !this.shiftKey && !keyBtn.supText
+          !keyBtn.specialKeyStatus && this.isCaps && !this.shiftKey && !keyBtn.supText.innerHTML
         ) {
           this.btnsKey[i].mainKeyText.innerHTML = keyBtn.keySpecial;
         } else if (!keyBtn.specialKeyStatus && this.isCaps && this.shiftKey) {
           this.btnsKey[i].mainKeyText.innerHTML = keyBtn.keyChar;
-        } else if (!keyBtn.specialKeyStatus && !keyBtn.supText) {
+        } else if (!keyBtn.specialKeyStatus && !keyBtn.supText.innerHTML) {
           this.btnsKey[i].mainKeyText.innerHTML = keyBtn.keySpecial;
         }
       });
     } else {
       this.btnsKey.forEach((keyBtn, i) => {
-        if (keyBtn.supText && !keyBtn.specialKeyStatus) {
+        if (keyBtn.supText.innerHTML && !keyBtn.specialKeyStatus) {
           if (!this.isCaps) {
             this.btnsKey[i].mainKeyText.innerHTML = keyBtn.keyChar;
           } else this.btnsKey[i].mainKeyText.innerHTML = keyBtn.keySpecial;
@@ -186,6 +188,28 @@ export default class Keyboard {
       this.resetButtonState,
     );
     delete this.keysPressed[targetCode];
+  };
+
+  setLang = () => {
+    const langObj = Object.keys(keysLang);
+    let langIdx = langObj.indexOf(this.keyboardContainer.dataset.lang);
+    this.startLang = langIdx + 1 < langObj.length ? keysLang[langObj[langIdx += 1]]
+      : keysLang[langObj[langIdx -= langIdx]];
+
+    this.keyboardContainer.dataset.lang = langObj[langIdx];
+    this.btnsKey.forEach((keyBtn, i) => {
+      const keyObj = this.startLang.find((key) => key.keyCode === keyBtn.keyCode);
+      if (!keyObj) return;
+      this.btnsKey[i].keySpecial = keyObj.keySpecial;
+      this.btnsKey[i].keyChar = keyObj.keyChar;
+      if (keyObj.keySpecial && keyObj.keySpecial.match(/[^a-zA-Zа-яА-ЯёЁ0-9]/g)) {
+        this.btnsKey[i].supText.innerHTML = keyObj.keySpecial;
+      } else {
+        this.btnsKey[i].supText.innerHTML = '';
+      }
+      this.btnsKey[i].mainKeyText.innerHTML = keyObj.keyChar;
+    });
+    if (this.isCaps) this.changeCaseToUpper(true);
   };
 
   showTextOnTextaria(keyItem, keyText) {
