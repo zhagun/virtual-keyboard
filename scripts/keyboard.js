@@ -138,14 +138,21 @@ export default class Keyboard {
   changeCaseToUpper(statusCaseUper) {
     if (statusCaseUper) {
       this.btnsKey.forEach((keyBtn, i) => {
-        if (
-          !keyBtn.specialKeyStatus && this.isCaps && !this.shiftKey && !keyBtn.supText.innerHTML
+        if (keyBtn.supText.innerHTML !== '' && !keyBtn.specialKeyStatus) {
+          if ((this.isCaps && this.shiftKey) || this.shiftKey) {
+            this.btnsKey[i].mainKeyText.innerHTML = keyBtn.keySpecial;
+            this.btnsKey[i].supText.innerHTML = keyBtn.keyChar;
+          }
+        } else if (
+          !keyBtn.specialKeyStatus && this.isCaps && !this.shiftKey && keyBtn.supText.innerHTML === ''
         ) {
           this.btnsKey[i].mainKeyText.innerHTML = keyBtn.keySpecial;
-        } else if (!keyBtn.specialKeyStatus && this.isCaps && this.shiftKey) {
-          this.btnsKey[i].mainKeyText.innerHTML = keyBtn.keyChar;
         } else if (!keyBtn.specialKeyStatus && !keyBtn.supText.innerHTML) {
-          this.btnsKey[i].mainKeyText.innerHTML = keyBtn.keySpecial;
+          if (!this.isCaps) {
+            this.btnsKey[i].mainKeyText.innerHTML = keyBtn.keySpecial;
+          } else {
+            this.btnsKey[i].mainKeyText.innerHTML = keyBtn.keyChar;
+          }
         }
       });
     } else {
@@ -153,9 +160,15 @@ export default class Keyboard {
         if (keyBtn.supText.innerHTML && !keyBtn.specialKeyStatus) {
           if (!this.isCaps) {
             this.btnsKey[i].mainKeyText.innerHTML = keyBtn.keyChar;
-          } else this.btnsKey[i].mainKeyText.innerHTML = keyBtn.keySpecial;
+            this.btnsKey[i].supText.innerHTML = keyBtn.keySpecial;
+          } else if (this.isCaps && keyBtn.supText.innerHTML !== '') {
+            this.btnsKey[i].mainKeyText.innerHTML = keyBtn.keyChar;
+            this.btnsKey[i].supText.innerHTML = keyBtn.keySpecial;
+          } else if (this.isCaps && keyBtn.supText.innerHTML === '') {
+            this.btnsKey[i].mainKeyText.innerHTML = keyBtn.keyChar;
+          }
         } else if (!keyBtn.specialKeyStatus) {
-          if (this.isCaps) {
+          if (this.isCaps && keyBtn.supText.innerHTML === '') {
             this.btnsKey[i].mainKeyText.innerHTML = keyBtn.keySpecial;
           } else {
             this.btnsKey[i].mainKeyText.innerHTML = keyBtn.keyChar;
