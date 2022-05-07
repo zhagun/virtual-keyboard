@@ -1,6 +1,7 @@
 import createElement from './createKeyborad.js';
 import keysLang from './keysLang/general.js';
 import Key from './keys.js';
+import * as storage from './save_lang.js';
 
 const mainBlock = document.createElement('main');
 const container = document.createElement('div');
@@ -197,7 +198,7 @@ export default class Keyboard {
     let langIdx = langObj.indexOf(this.keyboardContainer.dataset.lang);
     this.startLang = langIdx + 1 < langObj.length ? keysLang[langObj[langIdx += 1]]
       : keysLang[langObj[langIdx -= langIdx]];
-
+    storage.setValueLang('keyboardLang', langObj[langIdx]);
     this.keyboardContainer.dataset.lang = langObj[langIdx];
     this.btnsKey.forEach((keyBtn, i) => {
       const keyObj = this.startLang.find((key) => key.keyCode === keyBtn.keyCode);
