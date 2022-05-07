@@ -12,7 +12,7 @@ export default function createElement(element, classNames, ...dataAttr) {
       if (attrValue === '') {
         elementHtml.setAttribute(attrName, '');
       }
-      if (attrName.match(/value|id|placeholder|cols|rows/)) {
+      if (attrName.match(/value|id|placeholder|cols|rows|autocorrect|spellcheck/)) {
         elementHtml.setAttribute(attrName, attrValue);
       } else {
         elementHtml.dataset[attrName] = attrValue;

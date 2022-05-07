@@ -20,6 +20,8 @@ export default class Keyboard {
     this.viewTxt = createElement(
       'textarea',
       'viewBlock',
+      ['spellcheck', false],
+      ['autocorrect', 'off'],
       ['rows', 5],
       ['cols', 50],
       ['placeholder', 'Type text'],
@@ -213,6 +215,78 @@ export default class Keyboard {
   };
 
   showTextOnTextaria(keyItem, keyText) {
-    this.viewTxt.value += keyText;
+    let cursorPos = this.viewTxt.selectionStart;
+    const startPosTxt = this.viewTxt.value.slice(0, cursorPos);
+    const endPosTxt = this.viewTxt.value.slice(cursorPos);
+    switch (keyItem.keyCode) {
+      case 'Tab':
+      {
+        this.viewTxt.value = `${startPosTxt}\t${endPosTxt}`;
+        cursorPos += 1;
+        break;
+      }
+      case 'Enter':
+      {
+        this.viewTxt.value = `${startPosTxt}\n${endPosTxt}`;
+        cursorPos += 1;
+        break;
+      }
+      case 'Backspace':
+      {
+        if (this.viewTxt.selectionStart !== this.viewTxt.selectionEnd) {
+          this.viewTxt.value = `${startPosTxt}${this.viewTxt.value.slice(this.viewTxt.selectionEnd)}`;
+        } else {
+          this.viewTxt.value = `${startPosTxt.slice(0, -1)}${endPosTxt}`;
+          cursorPos -= 1;
+        }
+        break;
+      }
+      case 'Space':
+      {
+        this.viewTxt.value = `${startPosTxt} ${endPosTxt}`;
+        cursorPos += 1;
+        break;
+      }
+      case 'ArrowLeft':
+      {
+        cursorPos = cursorPos - 1 >= 0 ? cursorPos - 1 : 0;
+        break;
+      }
+      case 'ArrowRight':
+      {
+        cursorPos += 1;
+        break;
+      }
+      case 'ArrowUp':
+      {
+        const leftPos = this.viewTxt.value.slice(0, cursorPos).match(/(\n).*$(?!\1)/g) || [[1]];
+        cursorPos -= leftPos[0].length;
+        break;
+      }
+      case 'ArrowDown':
+      {
+        const leftPos = this.viewTxt.value.slice(cursorPos).match(/^.*(\n).*(?!\1)/) || [[1]];
+        cursorPos += leftPos[0].length;
+        break;
+      }
+      case 'Delete':
+      {
+        if (this.viewTxt.selectionStart !== this.viewTxt.selectionEnd) {
+          this.viewTxt.value = `${startPosTxt}${this.viewTxt.value.slice(this.viewTxt.selectionEnd)}`;
+        } else {
+          this.viewTxt.value = `${startPosTxt}${endPosTxt.slice(1)}`;
+        }
+        break;
+      }
+      default:
+      {
+        if (!keyItem.specialKeyStatus) {
+          cursorPos += 1;
+          this.viewTxt.value = `${startPosTxt}${keyText || ''}${endPosTxt}`;
+          break;
+        }
+      }
+    }
+    this.viewTxt.setSelectionRange(cursorPos, cursorPos);
   }
 }
