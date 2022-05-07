@@ -273,14 +273,14 @@ export default class Keyboard {
       }
       case 'ArrowUp':
       {
-        const leftPos = this.viewTxt.value.slice(0, cursorPos).match(/(\n).*$(?!\1)/g) || [[1]];
-        cursorPos -= leftPos[0].length;
+        this.viewTxt.value = `${startPosTxt}↑${endPosTxt}`;
+        cursorPos += 1;
         break;
       }
       case 'ArrowDown':
       {
-        const leftPos = this.viewTxt.value.slice(cursorPos).match(/^.*(\n).*(?!\1)/) || [[1]];
-        cursorPos += leftPos[0].length;
+        this.viewTxt.value = `${startPosTxt}↓${endPosTxt}`;
+        cursorPos += 1;
         break;
       }
       case 'Delete':
