@@ -91,6 +91,78 @@ main {
 [data-code="ShiftRight"] {
   width: 128px;
 }
+[data-code="ShiftLeft"],
+[data-code="ShiftRight"]{
+  background-color: #0065c8;
+}
+[data-code="ShiftLeft"] .mainText,
+[data-code="ShiftRight"] .mainText{
+  color: #fff;
+}
+[data-code="ControlLeft"],
+[data-code="ControlRight"]{
+  background-color: #891aa1;
+}
+[data-code="ControlLeft"] .mainText,
+[data-code="ControlRight"] .mainText{
+  color: #fff;
+}
+[data-code="AltLeft"],
+[data-code="AltRight"]{
+  background-color: #1615ca;
+}
+[data-code="AltLeft"] .mainText,
+[data-code="AltRight"] .mainText{
+  color: #fff;
+}
+[data-code="CapsLock"]{
+  background-color: #b23a0e;
+}
+[data-code="CapsLock"] .mainText{
+  color: #fff;
+}
+[data-code="Tab"]{
+  background-color: #0d8e89;
+}
+[data-code="Tab"] .mainText{
+  color: #fff;
+}
+[data-code="Win"]{
+  background-color: #c78908;
+}
+[data-code="Win"] .mainText{
+  color: #fff;
+}
+[data-code="Enter"]{
+  background-color: #fba403;
+}
+[data-code="Enter"] .mainText{
+  color: #fff;
+}
+[data-code="Backspace"]{
+  background-color: #991e1f;
+}
+[data-code="Backspace"] .mainText{
+  color: #fff;
+}
+[data-code="Delete"]{
+  background-color: #c71432;
+}
+[data-code="Delete"] .mainText{
+  color: #fff;
+}
+[data-code="ArrowUp"],
+[data-code="ArrowDown"],
+[data-code="ArrowLeft"],
+[data-code="ArrowRight"]{
+  background-color: #189e5a;
+}
+[data-code="ArrowUp"] .mainText,
+[data-code="ArrowDown"] .mainText,
+[data-code="ArrowLeft"] .mainText,
+[data-code="ArrowRight"] .mainText{
+  color: #fff;
+}
 [data-code="Space"] {
   max-width: 456px;
   width: 100%;
@@ -109,4 +181,85 @@ main {
 .keys.pressed .mainText {
   color: #c94622;
 }
-
+.keys.pressed[data-code="CapsLock"]{
+  box-shadow: inset -0.316666666666667vw -0.316666666666667vw 0.95vw -0.158333333333333vw #f49675, inset 0.316666666666667vw 0.316666666666667vw 0.633333333333333vw #b23a0e;
+}
+.keys.pressed[data-code="CapsLock"] .mainText{
+  color: #fff;
+  text-shadow: 0 0 10px #f6a588, 0 0 15px #f6a588, 0 0 20px #f6a588;
+}
+.keys.pressed[data-code="ShiftLeft"],
+.keys.pressed[data-code="ShiftRight"]{
+  box-shadow: inset -0.316666666666667vw -0.316666666666667vw 0.95vw -0.158333333333333vw #71b9ff, inset 0.316666666666667vw 0.316666666666667vw 0.633333333333333vw #0065c8;
+}
+.keys.pressed[data-code="ShiftLeft"] .mainText,
+.keys.pressed[data-code="ShiftRight"] .mainText{
+  color: #fff;
+  text-shadow: 0 0 10px #85c3ff, 0 0 15px #85c3ff, 0 0 20px #85c3ff;
+}
+.keys.pressed[data-code="ControlLeft"],
+.keys.pressed[data-code="ControlRight"]{
+  box-shadow: inset -0.316666666666667vw -0.316666666666667vw 0.95vw -0.158333333333333vw #d57be9, inset 0.316666666666667vw 0.316666666666667vw 0.633333333333333vw #891aa1;
+}
+.keys.pressed[data-code="ControlLeft"] .mainText,
+.keys.pressed[data-code="ControlRight"] .mainText{
+  color: #fff;
+  text-shadow: 0 0 10px #db8eec, 0 0 15px #db8eec, 0 0 20px #db8eec;
+}
+.keys.pressed[data-code="Tab"]{
+  box-shadow: inset -0.316666666666667vw -0.316666666666667vw 0.95vw -0.158333333333333vw #5aede7, inset 0.316666666666667vw 0.316666666666667vw 0.633333333333333vw #0d8e89;
+}
+.keys.pressed[data-code="Tab"] .mainText{
+  color: #fff;
+  text-shadow: 0 0 10px #72f0eb, 0 0 15px #72f0eb, 0 0 20px #72f0eb;
+}
+.keys.pressed[data-code="Win"]{
+  box-shadow: inset -0.316666666666667vw -0.316666666666667vw 0.95vw -0.158333333333333vw #fad17d, inset 0.316666666666667vw 0.316666666666667vw 0.633333333333333vw #c78908;
+}
+.keys.pressed[data-code="Win"] .mainText{
+  color: #fff;
+  text-shadow: 0 0 10px #fad890, 0 0 15px #fad890, 0 0 20px #fad890;
+}
+.keys.pressed[data-code="AltLeft"],
+.keys.pressed[data-code="AltRight"]{
+  box-shadow: inset -0.316666666666667vw -0.316666666666667vw 0.95vw -0.158333333333333vw #9291f3, inset 0.316666666666667vw 0.316666666666667vw 0.633333333333333vw #1615ca;
+}
+.keys.pressed[data-code="AltLeft"] .mainText,
+.keys.pressed[data-code="AltRight"] .mainText{
+  color: #fff;
+  text-shadow: 0 0 10px #a2a1f5, 0 0 15px #a2a1f5, 0 0 20px #a2a1f5;
+}
+.keys.pressed[data-code="Enter"]{
+  box-shadow: inset -0.316666666666667vw -0.316666666666667vw 0.95vw -0.158333333333333vw #fddea3, inset 0.316666666666667vw 0.316666666666667vw 0.633333333333333vw #fba403;
+}
+.keys.pressed[data-code="Enter"] .mainText{
+  color: #fff;
+  text-shadow: 0 0 10px #fde2b0, 0 0 15px #fde2b0, 0 0 20px #fde2b0;
+}
+.keys.pressed[data-code="Backspace"]{
+  box-shadow: inset -0.316666666666667vw -0.316666666666667vw 0.95vw -0.158333333333333vw #e57c7d, inset 0.316666666666667vw 0.316666666666667vw 0.633333333333333vw #991e1f;
+}
+.keys.pressed[data-code="Backspace"] .mainText{
+  color: #fff;
+  text-shadow: 0 0 10px #e88f90, 0 0 15px #e88f90, 0 0 20px #e88f90;
+}
+.keys.pressed[data-code="Delete"]{
+  box-shadow: inset -0.316666666666667vw -0.316666666666667vw 0.95vw -0.158333333333333vw #f38e9f, inset 0.316666666666667vw 0.316666666666667vw 0.633333333333333vw #c71432;
+}
+.keys.pressed[data-code="Delete"] .mainText{
+  color: #fff;
+  text-shadow: 0 0 10px #f59eac, 0 0 15px #f59eac, 0 0 20px #f59eac;
+}
+.keys.pressed[data-code="ArrowUp"],
+.keys.pressed[data-code="ArrowDown"],
+.keys.pressed[data-code="ArrowLeft"],
+.keys.pressed[data-code="ArrowRight"]{
+  box-shadow: inset -0.316666666666667vw -0.316666666666667vw 0.95vw -0.158333333333333vw #76eaaf, inset 0.316666666666667vw 0.316666666666667vw 0.633333333333333vw #189e5a;
+}
+.keys.pressed[data-code="ArrowUp"] .mainText,
+.keys.pressed[data-code="ArrowDown"] .mainText,
+.keys.pressed[data-code="ArrowLeft"] .mainText,
+.keys.pressed[data-code="ArrowRight"] .mainText{
+  color: #fff;
+  text-shadow: 0 0 10px #8aedbb, 0 0 15px #8aedbb, 0 0 20px #8aedbb;
+}
