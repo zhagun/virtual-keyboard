@@ -7,7 +7,7 @@ const mainBlock = document.createElement('main');
 const container = document.createElement('div');
 container.classList.add('main__container');
 mainBlock.appendChild(container);
-container.innerHTML = '<h1 class = "main__title">Virtual Keyboard</h1>';
+container.innerHTML = '<h1 class = "main__title">Virtual Keyboard</h1> <h4 class = "main__subtitle">Для переключения языка используйте сочетание клавиш Ctrl + Alt</h4>';
 
 export default class Keyboard {
   constructor(btnsSort) {

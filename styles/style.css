@@ -20,6 +20,10 @@ main {
 .main__title {
   padding-top: 30px;
 }
+.main__subtitle {
+  padding-top: 10px;
+  font-weight: normal;
+}
 .viewBlock {
   display: block;
   width: 1008px;
